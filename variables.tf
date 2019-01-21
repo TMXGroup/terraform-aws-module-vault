@@ -133,7 +133,9 @@ variable "lb_logs_enabled" {
 variable "lb_is_internal" {
   default     = false
 }
-
+variable "pub_subnet_ids" {
+  default     = ""
+}
 variable "target_groups" {
   description = "List of target group ARNs to apply to the autoscaling group."
   type        = "list"
