@@ -145,6 +145,3 @@ output "vault_asg_id" {
   value = "${element(concat(aws_autoscaling_group.vault.*.id, list("")), 0)}"
 }
 
-output "vault_username" {
-  value = "${lookup(var.users, var.os)}"
-}
