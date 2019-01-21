@@ -130,6 +130,10 @@ variable "lb_logs_enabled" {
   default     = true
 }
 
+variable "lb_is_internal" {
+  default     = false
+}
+
 variable "target_groups" {
   description = "List of target group ARNs to apply to the autoscaling group."
   type        = "list"
