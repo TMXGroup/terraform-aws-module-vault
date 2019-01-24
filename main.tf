@@ -21,7 +21,7 @@ data "template_file" "vault_init" {
 
 module "vault_server_sg" {
   source  = "terra.tmx.cloud/tmx-cloud/module-vault-server-ports-aws/aws"
-  version = "v0.1.8"
+  version = "v0.1.9"
   create      = "${var.create ? 1 : 0}"
   name        = "${var.name}-vault-server"
   vpc_id      = "${var.vpc_id}"
