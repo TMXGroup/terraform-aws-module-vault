@@ -28,6 +28,10 @@ variable "consul_version" {
   default     = "1.2.3"
 }
 
+variable "consul_sg_id" {
+  description = "Security group id from consul cluster"
+}
+
 variable "os" {
   description = "Operating System (e.g. RHEL or Ubuntu), defaults to \"RHEL\"."
   default     = "RHEL"
