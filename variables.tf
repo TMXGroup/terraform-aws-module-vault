@@ -78,7 +78,7 @@ variable "instance_profile" {
 
 variable "user_data" {
   description = "user_data script to pass in at runtime."
-  default     = ""
+  default     = false
 }
 
 variable "ssh_key_name" {
