@@ -72,7 +72,7 @@ resource "aws_launch_configuration" "vault" {
 
 module "vault_lb_aws" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
-  version = "v0.1.1"
+  version = "v0.1.3"
 
   create             = "${var.create}"
   name               = "${var.name}"

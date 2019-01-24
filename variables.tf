@@ -95,6 +95,11 @@ variable "lb_cert" {
   default     = ""
 }
 
+
+variable "lb_cert_arn" {
+  description = "Pre defined cert for for LB issues from manager"
+}
+
 variable "lb_private_key" {
   description = "Private key for LB IAM server certificate."
   default     = ""
