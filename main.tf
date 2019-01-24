@@ -25,7 +25,8 @@ module "vault_server_sg" {
   create      = "${var.create ? 1 : 0}"
   name        = "${var.name}-vault-server"
   vpc_id      = "${var.vpc_id}"
-  cidr_blocks = "${var.consul_sg_id}" 
+  cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
+  sg_group    = "${var.consul_sg_id}" 
 }
 
 module "consul_client_sg" {
@@ -34,7 +35,7 @@ module "consul_client_sg" {
   create      = "${var.create ? 1 : 0}"
   name        = "${var.name}-vault-consul-client"
   vpc_id      = "${var.vpc_id}"
-cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
+  cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
 }
 
 resource "aws_security_group_rule" "ssh" {
