@@ -30,6 +30,9 @@ variable "consul_version" {
 
 variable "consul_sg_id" {
   description = "Security group id from consul cluster"
+  type        = "string"
+  default     = ""
+  
 }
 
 variable "os" {
