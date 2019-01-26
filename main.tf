@@ -59,7 +59,7 @@ resource "aws_launch_configuration" "vault" {
   instance_type               = "${var.instance_type}"
   image_id                    = "${var.image_id}" # TODO: Workaround for issue #11210
   iam_instance_profile        = "${var.instance_profile != "" ? var.instance_profile : module.consul_auto_join_instance_role.instance_profile_id}"
-  user_data                   = "${base64encode(data.template_file.vault_init.rendered)}"
+  user_data_base64            = "${base64gzip(data.template_file.vault_init.rendered)}"
   key_name                    = "${var.ssh_key_name}"
 
   security_groups = [
