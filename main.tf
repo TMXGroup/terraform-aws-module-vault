@@ -31,7 +31,7 @@ module "vault_server_sg" {
 }
 
 module "consul_client_sg" {
-  source = "github.com/hashicorp-modules/consul-client-ports-aws"
+  source = "github.com/TMXGroup/consul-client-ports-aws"
 
   create      = "${var.create ? 1 : 0}"
   name        = "${var.name}-vault-consul-client"
