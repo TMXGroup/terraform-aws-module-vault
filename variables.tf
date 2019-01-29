@@ -88,6 +88,11 @@ variable "user_data" {
   default     = false
 }
 
+variable "bastion_ip" {
+  description = "user_data script to pass in at runtime."
+  default     = false
+}
+
 variable "ssh_key_name" {
   description = "AWS key name you will use to access the instance(s)."
 }

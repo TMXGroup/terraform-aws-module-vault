@@ -22,12 +22,12 @@ data "template_file" "vault_init" {
 
 module "vault_server_sg" {
   source  = "terra.tmx.cloud/tmx-cloud/module-vault-server-ports-aws/aws"
-  version = "v0.1.9"
+  version = "v0.2.0"
   create      = "${var.create ? 1 : 0}"
   name        = "${var.name}-vault-server"
   vpc_id      = "${var.vpc_id}"
   cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
-  sg_group    = "${var.consul_sg_id}" 
+  consul_sg_group    = "${var.consul_sg_id}" 
 }
 
 module "consul_client_sg" {
@@ -37,6 +37,7 @@ module "consul_client_sg" {
   name        = "${var.name}-vault-consul-client"
   vpc_id      = "${var.vpc_id}"
   cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
+  consul_sg_group    = "${var.consul_sg_id}" 
 }
 
 resource "aws_security_group_rule" "ssh" {
@@ -47,7 +48,7 @@ resource "aws_security_group_rule" "ssh" {
   protocol          = "tcp"
   from_port         = 22
   to_port           = 22
-  cidr_blocks       = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open port 22 for public access - DO NOT DO THIS IN PROD
+  cidr_blocks       = "${var.bastion_ip}"
 }
 
 resource "aws_launch_configuration" "vault" {
