@@ -89,8 +89,7 @@ variable "user_data" {
 }
 
 variable "bastion_ip" {
-  description = "user_data script to pass in at runtime."
-  default     = false
+  description = "IP address of bastion h"
 }
 
 variable "ssh_key_name" {

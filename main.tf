@@ -48,7 +48,7 @@ resource "aws_security_group_rule" "ssh" {
   protocol          = "tcp"
   from_port         = 22
   to_port           = 22
-  cidr_blocks       = "${var.bastion_ip}"
+  cidr_blocks       = ["${var.bastion_ip}"]
 }
 
 resource "aws_launch_configuration" "vault" {
