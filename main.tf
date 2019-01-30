@@ -22,22 +22,24 @@ data "template_file" "vault_init" {
 
 module "vault_server_sg" {
   source  = "terra.tmx.cloud/tmx-cloud/module-vault-server-ports-aws/aws"
-  version = "v0.2.0"
-  create      = "${var.create ? 1 : 0}"
-  name        = "${var.name}-vault-server"
-  vpc_id      = "${var.vpc_id}"
-  cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
-  consul_sg_group    = "${var.consul_sg_id}" 
+  version = "v0.2.1"
+
+  create            = "${var.create ? 1 : 0}"
+  name              = "${var.name}-vault-server"
+  vpc_id            = "${var.vpc_id}"
+  cidr_blocks       = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
+  consul_sg_group   = "${var.consul_sg_id}" 
+  vault_lb_sg_group = "${module.vault_lb_aws.vault_lb_sg_id}"
 }
 
 module "consul_client_sg" {
   source = "github.com/TMXGroup/terraform-aws-module-consul-client-ports"
 
-  create      = "${var.create ? 1 : 0}"
-  name        = "${var.name}-vault-consul-client"
-  vpc_id      = "${var.vpc_id}"
-  cidr_blocks = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
-  consul_sg_group    = "${var.consul_sg_id}" 
+  create            = "${var.create ? 1 : 0}"
+  name              = "${var.name}-vault-consul-client"
+  vpc_id            = "${var.vpc_id}"
+  cidr_blocks       = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open Consul ports for public access - DO NOT DO THIS IN PROD
+  consul_sg_group   = "${var.consul_sg_id}" 
 }
 
 resource "aws_security_group_rule" "ssh" {
@@ -49,6 +51,7 @@ resource "aws_security_group_rule" "ssh" {
   from_port         = 22
   to_port           = 22
   cidr_blocks       = ["${var.bastion_ip}"]
+  description       = "Bastion host"
 }
 
 resource "aws_launch_configuration" "vault" {
@@ -76,7 +79,6 @@ resource "aws_launch_configuration" "vault" {
 module "vault_lb_aws" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
   version = "v0.1.5"
-
 
   create             = "${var.create}"
   name               = "${var.name}"
