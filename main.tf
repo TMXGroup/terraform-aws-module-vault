@@ -78,7 +78,7 @@ resource "aws_launch_configuration" "vault" {
 
 module "vault_lb_aws" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
-  version = "v0.1.6"
+  version = "v0.1.7"
 
   create             = "${var.create}"
   name               = "${var.name}"
@@ -95,6 +95,7 @@ module "vault_lb_aws" {
   lb_bucket_override = "${var.lb_bucket_override}"
   lb_bucket_prefix   = "${var.lb_bucket_prefix}"
   lb_logs_enabled    = "${var.lb_logs_enabled}"
+  s3_logging_target  = "${var.s3_logging_target}"
   tags               = "${var.tags}"
 }
 
