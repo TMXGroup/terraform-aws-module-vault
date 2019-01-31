@@ -1,4 +1,4 @@
-# AWS Vault Terraform Module (External Fork)
+# AWS Vault Terraform Module
 
 Provisions resources for a Vault auto-scaling group in AWS.
 

@@ -67,6 +67,10 @@ variable "public" {
   default     = false
 }
 
+variable "ext_cert_arn" {
+  description = "ARN for AWS issues certifcate"
+}
+
 variable "count" {
   description = "Number of Vault nodes to provision across private subnets, defaults to private subnet count."
   default     = -1

@@ -78,7 +78,7 @@ resource "aws_launch_configuration" "vault" {
 
 module "vault_lb_aws" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
-  version = "v0.1.7"
+  version = "v0.1.8"
 
   create             = "${var.create}"
   name               = "${var.name}"
@@ -87,6 +87,7 @@ module "vault_lb_aws" {
   subnet_ids         = ["${var.pub_subnet_ids}"]
   is_internal_lb     = "${var.lb_is_internal}"
   use_lb_cert        = "${var.use_lb_cert}"
+  ext_cert_arn       = "${var.ext_cert_arn}"
   lb_cert            = "${var.lb_cert}"
   lb_private_key     = "${var.lb_private_key}"
   lb_cert_chain      = "${var.lb_cert_chain}"
