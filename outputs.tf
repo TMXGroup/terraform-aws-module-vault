@@ -117,6 +117,9 @@ README
 
 output "consul_sg_id" {
   value = "${module.consul_client_sg.consul_client_sg_id}"
+
+output "consul_sg_id" {
+  value = "${module.consul_client_sg.consul_client_sg_id}"
 }
 
 output "vault_sg_id" {
