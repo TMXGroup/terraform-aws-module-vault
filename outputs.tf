@@ -145,4 +145,3 @@ output "vault_lb_dns" {
 output "vault_asg_id" {
   value = "${element(concat(aws_autoscaling_group.vault.*.id, list("")), 0)}"
 }
-
