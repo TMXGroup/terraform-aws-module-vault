@@ -113,7 +113,7 @@ module "vault_lb_aws_internal" {
   vpc_id             = "${var.vpc_id}"
   cidr_blocks        = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] 
   subnet_ids         = ["${var.subnet_private_ids}"]
-  is_internal_lb     = "${var.lb_is_internal}"
+  is_internal_lb     = false
   use_lb_cert        = "${var.use_lb_cert}"
   ext_cert_arn       = "${var.lb_cert}"
   lb_cert            = "${var.lb_cert}"
