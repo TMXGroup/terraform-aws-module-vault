@@ -83,11 +83,35 @@ module "vault_lb_aws" {
   create             = "${var.create}"
   name               = "${var.name}"
   vpc_id             = "${var.vpc_id}"
-  cidr_blocks        = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] # If there's a public IP, open port 22 for public access - DO NOT DO THIS IN PROD
+  cidr_blocks        = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] 
   subnet_ids         = ["${var.pub_subnet_ids}"]
   is_internal_lb     = "${var.lb_is_internal}"
   use_lb_cert        = "${var.use_lb_cert}"
   ext_cert_arn       = "${var.ext_cert_arn}"
+  lb_cert            = "${var.lb_cert}"
+  lb_private_key     = "${var.lb_private_key}"
+  lb_cert_chain      = "${var.lb_cert_chain}"
+  lb_ssl_policy      = "${var.lb_ssl_policy}"
+  lb_bucket          = "${var.lb_bucket}"
+  lb_bucket_override = "${var.lb_bucket_override}"
+  lb_bucket_prefix   = "${var.lb_bucket_prefix}"
+  lb_logs_enabled    = "${var.lb_logs_enabled}"
+  s3_logging_target  = "${var.s3_logging_target}"
+  tags               = "${var.tags}"
+}
+
+module "vault_lb_aws_internal" {
+  source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
+  version = "v0.2.1"
+
+  create             = "${var.create}"
+  name               = "${var.name}"
+  vpc_id             = "${var.vpc_id}"
+  cidr_blocks        = ["${var.public ? "0.0.0.0/0" : var.vpc_cidr}"] 
+  subnet_ids         = ["${var.subnet_private_ids}"]
+  is_internal_lb     = "${var.lb_is_internal}"
+  use_lb_cert        = "${var.use_lb_cert}"
+  ext_cert_arn       = "${var.lb_cert}"
   lb_cert            = "${var.lb_cert}"
   lb_private_key     = "${var.lb_private_key}"
   lb_cert_chain      = "${var.lb_cert_chain}"

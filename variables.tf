@@ -155,6 +155,11 @@ variable "lb_is_internal" {
 variable "pub_subnet_ids" {
    type        = "list"
 }
+
+variable "subnet_private_ids" {
+   type        = "list"
+}
+
 variable "target_groups" {
   description = "List of target group ARNs to apply to the autoscaling group."
   type        = "list"
