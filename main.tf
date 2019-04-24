@@ -79,7 +79,7 @@ resource "aws_launch_configuration" "vault" {
 ##### External LB ######
 module "vault_lb_aws" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
-  version = "v0.2.4"
+  version = "v0.2.5"
 
   create                = "${var.create}"
   name                  = "${var.name}"
@@ -106,7 +106,7 @@ module "vault_lb_aws" {
 ##### Internal LB ######
 module "vault_lb_aws_internal" {
   source = "terra.tmx.cloud/tmx-cloud/module-vault-lb-aws/aws"
-  version = "v0.2.4"
+  version = "v0.2.5"
 
   create             = "${var.create}"
   name               = "${var.name}"
